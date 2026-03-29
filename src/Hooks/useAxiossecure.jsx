@@ -4,7 +4,8 @@ import { useEffect } from 'react'
 // import { useNavigate } from 'react-router'
 
 const axiosSecure = axios.create({
-  baseURL: 'http://localhost:3000',
+  // baseURL: 'http://localhost:3000',
+  baseURL: 'https://bbgc.academichelperbd.xyz',
 })
 
 const useAxiossecure = () => {
