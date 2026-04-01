@@ -1,3 +1,4 @@
+
 import {
   FaFacebookF,
   FaInstagram,
@@ -172,12 +173,12 @@ const Footer = () => {
           {isLoading ? "Loading..." : (footerData?.copyright || "© 2026 Jannatul Ummah Girls Dakhil Madrasa ·")}
           {!isLoading && footerData?.copyright && (
             <span className="block mt-1 text-cyan-400">
-              SoftEdge Technology LTD
+              Developed by SoftEdge Technology LTD.
             </span>
           )}
           {!footerData?.copyright && !isLoading && (
             <span className="block mt-1 text-cyan-400">
-              SoftEdge Technology LTD
+              Developed by SoftEdge Technology LTD.
             </span>
           )}
         </p>
@@ -187,3 +188,5 @@ const Footer = () => {
 };
 
 export default Footer;
+
+

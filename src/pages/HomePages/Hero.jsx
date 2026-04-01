@@ -70,9 +70,9 @@ const Hero = () => {
                     : "https://i.ibb.co/ZVxZp5k/user.png"
                 }
                 alt={principal?.name}
-                className="w-full h-40 rounded-2xl mb-4 object-cover"
+                className="w-full h-40 rounded-2xl mb-4 object-contain bg-white/5 p-2"
               />
-              <h3 className="font-semibold text-lg">{principal?.name}</h3>
+              <h3 className="font-semibold text-xl">{principal?.name}</h3>
               <p className="text-sm text-cyan-400">
                 {principal?.designation}
               </p>
@@ -88,9 +88,9 @@ const Hero = () => {
                     : "https://i.ibb.co/ZVxZp5k/user.png"
                 }
                 alt={chairman?.name}
-                className="w-full h-40 rounded-2xl mb-4 object-cover"
+                className="w-full h-40 rounded-2xl mb-4 object-contain bg-white/5 p-2"
               />
-              <h3 className="font-semibold text-lg">{chairman?.name}</h3>
+              <h3 className="font-semibold text-xl">{chairman?.name}</h3>
               <p className="text-sm text-cyan-400">
                 {chairman?.designation}
               </p>
@@ -132,7 +132,7 @@ const Hero = () => {
                       <img
                         src={`${import.meta.env.VITE_API_URL}${slide.image}`}
                         alt={slide.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain bg-black"
                       />
                       <div className="absolute inset-0 bg-black/40 flex items-end justify-center pb-8">
                         <h1 className="text-4xl font-bold text-center px-8">

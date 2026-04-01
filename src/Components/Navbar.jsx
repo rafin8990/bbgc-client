@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, NavLink } from "react-router";
 import { FaChevronDown, FaBars, FaTimes } from "react-icons/fa";
@@ -22,8 +23,8 @@ const menuData = [
   {
     name: "ADMINISTRATION",
     dropdown: [
-      { name: "Vice Principal", link: "/chairmen" },
       { name: "Principal", link: "/principal" },
+      { name: "Vice Principal", link: "/chairmen" },
       { name: "Teachers", link: "/teacher" },
     ],
   },
@@ -253,3 +254,4 @@ export default function Navbar() {
     </nav>
   );
 }
+

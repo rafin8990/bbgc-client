@@ -75,23 +75,6 @@ const Mainlayout = () => {
                 </h1>
 
                 <div className="space-y-1">
-                  <p className="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed break-words">
-                    {headerLoading ? (
-                      <span className="animate-pulse">Loading...</span>
-                    ) : (
-                      <>
-                        {headerData?.description ||
-                          "BEANIBAZAR GOVT. COLLEGE"}
-                        {headerData?.establishmentDate && (
-                          <span className="text-cyan-300 font-medium">
-                            {" "}
-                            - {headerData.establishmentDate}
-                          </span>
-                        )}
-                      </>
-                    )}
-                  </p>
-
                   <p className="text-xs sm:text-sm md:text-base text-gray-400 break-words">
                     {headerLoading ? (
                       <span className="animate-pulse">Loading...</span>
@@ -100,6 +83,14 @@ const Mainlayout = () => {
                       "Beanibazar, Sylhet, Bangladesh"
                     )}
                   </p>
+
+                  {headerData?.establishmentDate && !headerLoading && (
+                    <p className="text-xs sm:text-sm md:text-base">
+                      <span className="text-cyan-300 font-medium">
+                        Established: {headerData.establishmentDate}
+                      </span>
+                    </p>
+                  )}
 
                   {headerData?.einNumber && !headerLoading && (
                     <p className="text-xs sm:text-sm md:text-base">
@@ -133,3 +124,4 @@ const Mainlayout = () => {
 };
 
 export default Mainlayout;
+
