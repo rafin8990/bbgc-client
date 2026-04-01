@@ -24,7 +24,7 @@ const LatestNewsEvents = () => {
   });
 
   return (
-    <section className="relative bg-[#050b1e] text-white py-20 px-6 overflow-hidden">
+    <section className="relative bg-[#050b1e] text-white py-8 px-6 overflow-hidden">
 
       {/* Glow Background */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-600/30 blur-[120px]" />
@@ -33,7 +33,7 @@ const LatestNewsEvents = () => {
       <div className="relative max-w-7xl mx-auto">
 
         {/* Header */}
-        <div className="flex flex-col md:flex-row items-center justify-between mb-14">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-8">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-cyan-400">
               Latest News & Events

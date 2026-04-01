@@ -1,31 +1,48 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { FaEnvelope, FaLock } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import logo from "../../../assets/logo.jpeg";
 import useAuth from "../../../Hooks/useAuth";
+import useAxiossecure from "../../../Hooks/useAxiossecure";
 
 const Login = () => {
-    const {loginUser}=useAuth()
+    const { loginUser } = useAuth();
+    const axiosSecure = useAxiossecure();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const handleLogin = (data) => {
-    console.log(data);
-    loginUser(data.email,data.password)
-    .then(res=>{
-        console.log(res.data);
-        alert("Login Successfully")
-        
-    })
-    .catch(error=>{
-        console.log(error);
-        alert(error.message)
-        
-    })
+  const handleLogin = async (data) => {
+    try {
+      const res = await loginUser(data.email, data.password);
+      const email = res?.user?.email;
+
+      if (!email) {
+        alert("Login failed: user email not found");
+        return;
+      }
+
+      const roleRes = await axiosSecure.get(`/users/${email}/role`);
+      const role = roleRes.data?.role;
+
+      alert("Login Successfully");
+
+      if (role === "admin") {
+        navigate("/dashboard", { replace: true });
+        return;
+      }
+
+      navigate(from, { replace: true });
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+    }
   };
 
   return (
@@ -114,6 +131,16 @@ const Login = () => {
           <Link to="/" className="text-sm text-cyan-400 hover:underline">
             ← Back to Home
           </Link>
+        </div>
+
+        {/* Register Link */}
+        <div className="text-center mt-2">
+          <p className="text-sm text-gray-400">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-cyan-400 hover:underline">
+              Register here
+            </Link>
+          </p>
         </div>
 
         {/* Footer text */}

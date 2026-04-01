@@ -22,7 +22,7 @@ import { useState } from "react";
 const Notice = () => {
   const [editNotice, setEditNotice] = useState(null);
 
-    const {register,handleSubmit,formState:{errors}}=useForm()
+    const {register,handleSubmit,reset,formState:{errors}}=useForm()
      
     // edit form
     const {
@@ -44,11 +44,24 @@ const Notice = () => {
     const handleNotice= async(data)=>{
 
           console.log(data);
-          await axiosSecure.post('/notice',data)
+          const formData = new FormData();
+          formData.append('noticeTitle', data.noticeTitle);
+          formData.append('noticeDescription', data.noticeDescription);
+          formData.append('noticeStatus', data.noticeStatus || 'Published');
+          if (data.file && data.file[0]) {
+            formData.append('file', data.file[0]);
+          }
+          
+          await axiosSecure.post('/notice', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          })
           .then(()=>{
                       refetch()
+            reset()
             alert("Notice Added")
-             document.getElementById("upload_notice_modal").close(); 
+            document.getElementById("upload_notice_modal").close(); 
           })
           .catch(error=>{
             alert(error.message)
@@ -103,10 +116,31 @@ const Notice = () => {
             className="card bg-base-100 shadow-md"
           >
             <div className="card-body">
-              <h2 className="card-title">{notice.noticeTitle}</h2>
+              <div className="flex items-center justify-between">
+                <h2 className="card-title">{notice.noticeTitle}</h2>
+                {notice.file && (
+                  <span className="badge badge-info badge-sm">📎 File</span>
+                )}
+              </div>
               <p className="text-sm text-gray-500">
                 প্রকাশের তারিখ: {notice.createdAt}
               </p>
+              {notice.file && (
+                <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded-md">
+                  <div className="flex items-center gap-2">
+                    <span className="text-blue-500">📎</span>
+                    <span className="text-blue-700 text-sm font-medium">Attachment:</span>
+                    <a
+                      href={`${import.meta.env.VITE_API_URL || "http://localhost:3000"}${notice.file}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 underline text-sm"
+                    >
+                      {notice.file.split('/').pop()}
+                    </a>
+                  </div>
+                </div>
+              )}
 
               <div className="card-actions justify-end mt-4">
                <button
@@ -166,7 +200,21 @@ const Notice = () => {
         </p>
       )}
 
-     
+      <input
+        type="file"
+        {...register("file")}
+        className="file-input file-input-bordered w-full"
+        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+      />
+
+      <select
+        {...register("noticeStatus")}
+        className="select select-bordered w-full"
+        defaultValue="Published"
+      >
+        <option value="Published">Published</option>
+        <option value="Draft">Draft</option>
+      </select>
       {errors.noticeStatus && (
         <p className="text-red-500">Set notice status</p>
       )}
@@ -204,9 +252,22 @@ const Notice = () => {
     <form
       className="space-y-4"
       onSubmit={handleEditSubmit(async (data) => {
+        const formData = new FormData();
+        formData.append('noticeTitle', data.noticeTitle);
+        formData.append('noticeDescription', data.noticeDescription);
+        formData.append('noticeStatus', data.noticeStatus || 'Published');
+        if (data.file && data.file[0]) {
+          formData.append('file', data.file[0]);
+        }
+
         await axiosSecure.patch(
           `/notice/${editNotice?._id}`,
-          data
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }
         );
         refetch()
         alert("Notice Updated");
@@ -226,7 +287,21 @@ const Notice = () => {
         className="textarea textarea-bordered w-full h-28"
       />
 
-     
+      <input
+        type="file"
+        {...editRegister("file")}
+        className="file-input file-input-bordered w-full"
+        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+      />
+
+      <select
+        {...editRegister("noticeStatus")}
+        className="select select-bordered w-full"
+        defaultValue={editNotice?.noticeStatus || "Published"}
+      >
+        <option value="Published">Published</option>
+        <option value="Draft">Draft</option>
+      </select>
 
       <div className="modal-action">
         <button

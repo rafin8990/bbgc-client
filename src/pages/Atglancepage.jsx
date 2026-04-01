@@ -25,14 +25,14 @@ const Atglancepage = () => {
   }
 
   return (
-    <section className="relative bg-[#050b1e] text-white overflow-hidden py-24">
+    <section className="relative bg-[#050b1e] text-white overflow-hidden py-8">
       {/* Glow background */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-cyan-400/30 blur-[120px]" />
       <div className="absolute bottom-0 -right-32 w-96 h-96 bg-blue-600/30 blur-[120px]" />
 
       <div className="relative max-w-6xl mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold">
             At a <span className="text-cyan-400">Glance</span>
           </h1>
@@ -43,7 +43,7 @@ const Atglancepage = () => {
 
         {/* Cards */}
         {/* Cards */}
-<div className="space-y-20">
+<div className="space-y-10">
   {glanceData.map((item, index) => (
     <div
       key={item._id}

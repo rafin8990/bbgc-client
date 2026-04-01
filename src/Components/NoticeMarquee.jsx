@@ -15,7 +15,7 @@ const NoticeMarquee = () => {
   });
 
   return (
-    <section className="relative bg-[#050b1e] overflow-hidden py-6">
+    <section className="relative bg-[#050b1e] overflow-hidden py-3">
       
       {/* Glow effects (same as footer) */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-600/30 blur-[120px]" />

@@ -19,14 +19,14 @@ const Videopage = () => {
   });
 
   return (
-    <section className="relative min-h-screen bg-[#050b1e] text-white overflow-hidden py-20 px-6">
+    <section className="relative min-h-screen bg-[#050b1e] text-white overflow-hidden py-12 md:py-14 px-6">
       {/* ================= Glow Background ================= */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-600/30 blur-[120px]" />
       <div className="absolute bottom-0 -right-32 w-96 h-96 bg-cyan-400/20 blur-[120px]" />
 
       <div className="relative max-w-7xl mx-auto">
         {/* ================= Header ================= */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-8 md:mb-10">
           <h1 className="text-4xl font-bold mb-3 flex items-center justify-center gap-3">
             <FaVideo className="text-cyan-400" />
             Video Gallery
@@ -38,7 +38,7 @@ const Videopage = () => {
 
         {/* ================= Loading ================= */}
         {isLoading && (
-          <p className="text-center text-gray-400 mt-10">Loading videos...</p>
+          <p className="text-center text-gray-400 mt-6">Loading videos...</p>
         )}
 
         {/* ================= Grid ================= */}

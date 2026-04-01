@@ -1,8 +1,9 @@
-import { createBrowserRouter } from "react-router"
+import { createBrowserRouter, Navigate } from "react-router"
 import Mainlayout from "../Layouts/Mainlayout"
 import Home from "../pages/HomePages/Home"
 import Dashboard from "../pages/Dashboard/Dashboard"
 import Notice from "../DashboardPages/Notice"
+import SliderManagement from "../DashboardPages/SliderManagement"
 import Noticepage from "../pages/NoticePage/Noticepage"
 import ChairmenMessage from "../DashboardPages/ChairmenMessage"
 import PrincipalMessage from "../DashboardPages/PrincipalMessage"
@@ -48,6 +49,14 @@ import Examresultpage from "../pages/Result/Examresultpage"
 import Boardresultpage from "../pages/Result/Boardresultpage"
 import Studentlist from "../DashboardPages/Studentlist"
 import Whaystudy from "../DashboardPages/Whaystudy"
+import HeaderManagement from "../DashboardPages/HeaderManagement"
+import AboutManagement from "../DashboardPages/AboutManagement"
+import FooterManagement from "../DashboardPages/FooterManagement"
+import ContactManagement from "../DashboardPages/ContactManagement"
+import ComputerLabManagement from "../DashboardPages/ComputerLabManagement"
+import ScienceLabManagement from "../DashboardPages/ScienceLabManagement"
+import LibraryManagement from "../DashboardPages/LibraryManagement"
+import ClassroomManagement from "../DashboardPages/ClassroomManagement"
 
 export const router=createBrowserRouter([
      //Main Layout Routes
@@ -88,7 +97,9 @@ export const router=createBrowserRouter([
     {
         path:'/dashboard',
         element:<Privateroutes><Dashboard/></Privateroutes>,
-        children:[{path:'/dashboard/notice', element:<Notice/>},
+        children:[{index:true, element:<Navigate to="/dashboard/dashboard-manage" replace />},
+                 {path:'/dashboard/notice', element:<Notice/>},
+                  {path:'/dashboard/slider-management', element:<SliderManagement/>},
                   {path:'/dashboard/chairmen-message', element:<ChairmenMessage/>},
                   {path:'/dashboard/principal-message', element:<PrincipalMessage/>},
                   {path:'/dashboard/teachers', element:<Teachers/>},
@@ -107,6 +118,14 @@ export const router=createBrowserRouter([
                   {path:'/dashboard/dashboard-manage', element:<Dashboardmanage/>},
                   {path:'/dashboard/why-study', element:<Whaystudy/>},
                   {path:'/dashboard/student-list', element:<Studentlist/>},
+                  {path:'/dashboard/header-management', element:<HeaderManagement/>},
+                  {path:'/dashboard/about-management', element:<AboutManagement/>},
+                  {path:'/dashboard/footer-management', element:<FooterManagement/>},
+                  {path:'/dashboard/contact-management', element:<ContactManagement/>},
+                  {path:'/dashboard/computer-lab-management', element:<ComputerLabManagement/>},
+                  {path:'/dashboard/science-lab-management', element:<ScienceLabManagement/>},
+                  {path:'/dashboard/library-management', element:<LibraryManagement/>},
+                  {path:'/dashboard/classroom-management', element:<ClassroomManagement/>},
 
         ]
     }

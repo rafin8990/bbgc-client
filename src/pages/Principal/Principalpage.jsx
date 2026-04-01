@@ -36,8 +36,8 @@ const Principalpage = () => {
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-600/30 blur-[120px]" />
       <div className="absolute bottom-0 -right-32 w-96 h-96 bg-cyan-400/20 blur-[120px]" />
 
-      <div className="relative max-w-6xl mx-auto px-4 py-24">
-        <h2 className="text-4xl font-bold text-center mb-16 text-white">
+      <div className="relative max-w-6xl mx-auto px-4 py-12 md:py-14">
+        <h2 className="text-4xl font-bold text-center mb-8 md:mb-10 text-white">
           Message from the Principal
         </h2>
 

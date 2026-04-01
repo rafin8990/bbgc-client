@@ -22,14 +22,14 @@ const Achievementspage = () => {
   });
 
   return (
-    <section className="relative bg-[#050b1e] text-white min-h-screen overflow-hidden">
+    <section className="relative bg-[#050b1e] text-white overflow-hidden pt-2 pb-10">
       {/* Glow Background */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-600/30  blur-[120px]" />
       <div className="absolute top-1/2 -right-32 w-96 h-96 bg-cyan-400/20 blur-[120px]" />
 
-      <div className="relative max-w-7xl mx-auto px-6 py-20">
+      <div className="relative max-w-7xl mx-auto px-6 pt-0 pb-6">
         {/* Header */}
-        <div className="flex flex-col md:flex-row gap-6 items-center justify-between mb-14">
+        <div className="flex flex-col md:flex-row gap-6 items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold">Achievements</h1>
             <p className="text-gray-400 text-sm mt-2">

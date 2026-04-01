@@ -22,7 +22,7 @@ const Historypage = () => {
   }
 
   return (
-    <section className="relative bg-[#050b1e] text-white overflow-hidden py-24">
+    <section className="relative bg-[#050b1e] text-white overflow-hidden py-8">
       
       {/* Glow background */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-600/30 blur-[120px]" />
@@ -32,7 +32,7 @@ const Historypage = () => {
       <div className="relative max-w-6xl mx-auto px-6">
         
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold">
             Our <span className="text-cyan-400">History</span>
           </h1>

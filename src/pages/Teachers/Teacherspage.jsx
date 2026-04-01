@@ -22,14 +22,14 @@ const Teacherspage = () => {
   }
 
   return (
-    <section className="relative bg-[#050b1e] overflow-hidden py-20 px-4">
+    <section className="relative bg-[#050b1e] overflow-hidden py-12 md:py-14 px-4">
       {/* Glow background (same as footer) */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-600/30 blur-[120px]" />
       <div className="absolute bottom-0 -right-32 w-96 h-96 bg-cyan-400/20 blur-[120px]" />
 
       <div className="relative max-w-7xl mx-auto">
         {/* Heading */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-10">
           <h2 className="text-4xl md:text-5xl font-bold text-white">
             Our Honorable Teachers
           </h2>

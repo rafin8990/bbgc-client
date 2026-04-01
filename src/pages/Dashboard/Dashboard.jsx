@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from "react-router";
+import { NavLink, Outlet } from "react-router";
 import {
   FaHome,
   FaNewspaper,
@@ -9,8 +9,13 @@ import {
   FaNotesMedical,
   FaImage,
   FaVideo,
+  FaEdit,
+  FaKeyboard,
+  FaFlask,
+  FaBookOpen,
+  FaChalkboardTeacher,
 } from "react-icons/fa";
-import { FaClipboardUser } from "react-icons/fa6";
+import { FaClipboardUser, FaMapLocationDot } from "react-icons/fa6";
 
 const Dashboard = () => {
   return (
@@ -65,6 +70,7 @@ const Dashboard = () => {
             <li className="menu-title mt-3">About</li>
             <li><NavLink to="/dashboard/at-a-glance">At a Glance</NavLink></li>
             <li><NavLink to="/dashboard/history">History</NavLink></li>
+            <li><NavLink to="/dashboard/about-management">About Management</NavLink></li>
             <li><NavLink to="/dashboard/achievements">Achievement</NavLink></li>
             <li><NavLink to="/dashboard/news-events">News & Event</NavLink></li>
             <li><NavLink to="/dashboard/why-study">Why Study</NavLink></li>
@@ -72,16 +78,17 @@ const Dashboard = () => {
 
             {/* ADMINISTRATION */}
             <li className="menu-title mt-3">Administration</li>
+             <li>
+              <NavLink to="/dashboard/principal-message">
+                Principal's Message
+              </NavLink>
+            </li>
             <li>
               <NavLink to="/dashboard/chairmen-message">
                 <FaUserTie /> Vice Principal's Message
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/dashboard/principal-message">
-                Principal's Message
-              </NavLink>
-            </li>
+           
             <li>
               <NavLink to="/dashboard/teachers">
                 Teachers
@@ -110,6 +117,27 @@ const Dashboard = () => {
                 <FaNotesMedical /> Syllabus
               </NavLink>
             </li>
+            <li className="menu-title mt-3">Facilities</li>
+            <li>
+              <NavLink to="/dashboard/computer-lab-management">
+                <FaKeyboard /> Computer Lab Management
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/science-lab-management">
+                <FaFlask /> Science Lab Management
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/library-management">
+                <FaBookOpen /> Library Management
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/classroom-management">
+                <FaChalkboardTeacher /> Classroom Management
+              </NavLink>
+            </li>
 
            {/* Admission*/}
             <li className="menu-title mt-3">Admission</li>
@@ -127,6 +155,16 @@ const Dashboard = () => {
            {/* Photo videos*/}
             <li className="menu-title mt-3">Gallery</li>
             <li>
+              <NavLink to="/dashboard/header-management">
+                <FaImage /> Header Management
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/slider-management">
+                <FaImage /> Slider Management
+              </NavLink>
+            </li>
+            <li>
               <NavLink to="/dashboard/photos">
                 <FaImage /> Photos
               </NavLink>
@@ -143,6 +181,16 @@ const Dashboard = () => {
             <li>
               <NavLink to="/dashboard/notice">
                 <FaNewspaper /> Notice
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/contact-management">
+                <FaMapLocationDot /> Contact Management
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/footer-management">
+                <FaEdit /> Footer Management
               </NavLink>
             </li>
 
