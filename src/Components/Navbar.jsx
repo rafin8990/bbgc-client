@@ -240,6 +240,18 @@ export default function Navbar() {
             </div>
           ))}
 
+          {!roleLoading && role === "admin" && (
+            <div className="border-b border-white/10">
+              <NavLink
+                to="/dashboard"
+                onClick={() => setOpenMenu(false)}
+                className="block py-3 font-semibold text-sky-300 hover:text-sky-200"
+              >
+                DASHBOARD
+              </NavLink>
+            </div>
+          )}
+
          <NavLink to="/login">
   <div className="mt-4 px-5 py-2 rounded-lg bg-gradient-to-r from-sky-500/80 via-sky-600/80 to-sky-700/80 text-white font-semibold text-center cursor-pointer">
     LOGIN
