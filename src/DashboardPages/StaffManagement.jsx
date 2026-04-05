@@ -48,21 +48,33 @@ const StaffManagement = () => {
 
   const apiBase = import.meta.env.VITE_API_URL || "";
 
-  const handleAddStaff = (data) => {
-    const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("joiningDate", data.joiningDate || "");
-    formData.append("dateOfBirth", data.dateOfBirth || "");
-    formData.append("position", data.position || "");
-    formData.append("phone", data.phone || "");
-    formData.append("email", data.email || "");
-    formData.append("age", data.age ?? "");
-    if (data.file && data.file[0]) {
-      formData.append("file", data.file[0]);
-    }
+  const staffPayload = (data) => ({
+    name: data.name,
+    joiningDate: data.joiningDate || "",
+    dateOfBirth: data.dateOfBirth || "",
+    position: data.position || "",
+    phone: data.phone || "",
+    email: data.email || "",
+    age:
+      data.age === "" || data.age === undefined || data.age === null
+        ? ""
+        : data.age,
+  });
 
-    axiosSecure
-      .post("/staff", formData)
+  const handleAddStaff = (data) => {
+    const file = data.file?.[0];
+    const request = file
+      ? (() => {
+          const formData = new FormData();
+          Object.entries(staffPayload(data)).forEach(([k, v]) => {
+            formData.append(k, v === null || v === undefined ? "" : String(v));
+          });
+          formData.append("file", file);
+          return axiosSecure.post("/staff", formData);
+        })()
+      : axiosSecure.post("/staff", staffPayload(data));
+
+    request
       .then(() => {
         refetch();
         modalRef.current?.close();
@@ -70,26 +82,45 @@ const StaffManagement = () => {
       })
       .catch((err) => {
         console.error(err);
-        alert(err.response?.data?.message || err.message);
+        const msg =
+          err.response?.data?.message ||
+          (err.code === "ERR_NETWORK"
+            ? "Network error — check API URL (VITE_API_URL) and that the server is running."
+            : err.message);
+        alert(msg);
       });
   };
 
   const handleUpdateStaff = (data) => {
     if (!editingStaff) return;
-    const formData = new FormData();
-    formData.append("name", data.editedName);
-    formData.append("joiningDate", data.editedJoiningDate || "");
-    formData.append("dateOfBirth", data.editedDateOfBirth || "");
-    formData.append("position", data.editedPosition || "");
-    formData.append("phone", data.editedPhone || "");
-    formData.append("email", data.editedEmail || "");
-    formData.append("age", data.editedAge ?? "");
-    if (data.editedFile && data.editedFile[0]) {
-      formData.append("file", data.editedFile[0]);
-    }
+    const file = data.editedFile?.[0];
+    const body = {
+      name: data.editedName,
+      joiningDate: data.editedJoiningDate || "",
+      dateOfBirth: data.editedDateOfBirth || "",
+      position: data.editedPosition || "",
+      phone: data.editedPhone || "",
+      email: data.editedEmail || "",
+      age:
+        data.editedAge === "" ||
+        data.editedAge === undefined ||
+        data.editedAge === null
+          ? ""
+          : data.editedAge,
+    };
 
-    axiosSecure
-      .patch(`/staff/${editingStaff._id}`, formData)
+    const request = file
+      ? (() => {
+          const formData = new FormData();
+          Object.entries(body).forEach(([k, v]) => {
+            formData.append(k, v === null || v === undefined ? "" : String(v));
+          });
+          formData.append("file", file);
+          return axiosSecure.patch(`/staff/${editingStaff._id}`, formData);
+        })()
+      : axiosSecure.patch(`/staff/${editingStaff._id}`, body);
+
+    request
       .then(() => {
         refetch();
         modalEditRef.current?.close();
@@ -98,7 +129,12 @@ const StaffManagement = () => {
       })
       .catch((err) => {
         console.error(err);
-        alert(err.response?.data?.message || err.message);
+        const msg =
+          err.response?.data?.message ||
+          (err.code === "ERR_NETWORK"
+            ? "Network error — check VITE_API_URL and that the server is running."
+            : err.message);
+        alert(msg);
       });
   };
 
