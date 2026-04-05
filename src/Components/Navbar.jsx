@@ -26,6 +26,7 @@ const menuData = [
       { name: "Principal", link: "/principal" },
       { name: "Vice Principal", link: "/chairmen" },
       { name: "Teachers", link: "/teacher" },
+      { name: "Staffs", link: "/staffs" },
     ],
   },
 

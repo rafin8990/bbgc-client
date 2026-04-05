@@ -3,8 +3,12 @@ import { useEffect } from 'react'
 // import useAuth from './useAuth'
 // import { useNavigate } from 'react-router'
 
+const API_BASE =
+  import.meta.env.VITE_API_URL?.replace(/\/$/, '') ||
+  'https://bbgc.academichelperbd.xyz'
+
 const axiosSecure = axios.create({
-  baseURL: 'https://bbgc.academichelperbd.xyz',
+  baseURL: API_BASE,
 })
 
 const useAxiossecure = () => {

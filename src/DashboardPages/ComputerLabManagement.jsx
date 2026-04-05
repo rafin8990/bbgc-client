@@ -4,7 +4,8 @@ import useAxiossecure from "../Hooks/useAxiossecure";
 import { useQuery } from "@tanstack/react-query";
 
 const API_ORIGIN =
-  import.meta.env.VITE_API_URL?.replace(/\/$/, "") || "http://localhost:3000";
+  import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
+  "https://bbgc.academichelperbd.xyz";
 
 const ICON_OPTIONS = [
   { value: "desktop", label: "Desktop" },
@@ -39,6 +40,41 @@ const ComputerLabManagement = () => {
   const [heroFile, setHeroFile] = useState(null);
   const [aboutFile, setAboutFile] = useState(null);
   const [galleryFiles, setGalleryFiles] = useState([]);
+  const [heroPreviewUrl, setHeroPreviewUrl] = useState(null);
+  const [aboutPreviewUrl, setAboutPreviewUrl] = useState(null);
+  const [galleryPreviewUrls, setGalleryPreviewUrls] = useState([]);
+
+  useEffect(() => {
+    if (!heroFile) {
+      setHeroPreviewUrl(null);
+      return;
+    }
+    const url = URL.createObjectURL(heroFile);
+    setHeroPreviewUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [heroFile]);
+
+  useEffect(() => {
+    if (!aboutFile) {
+      setAboutPreviewUrl(null);
+      return;
+    }
+    const url = URL.createObjectURL(aboutFile);
+    setAboutPreviewUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [aboutFile]);
+
+  useEffect(() => {
+    if (!galleryFiles.length) {
+      setGalleryPreviewUrls([]);
+      return;
+    }
+    const urls = galleryFiles.map((f) => URL.createObjectURL(f));
+    setGalleryPreviewUrls(urls);
+    return () => {
+      urls.forEach((u) => URL.revokeObjectURL(u));
+    };
+  }, [galleryFiles]);
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["computer-lab-admin"],
@@ -96,9 +132,7 @@ const ComputerLabManagement = () => {
       if (aboutFile) fd.append("aboutImage", aboutFile);
       galleryFiles.forEach((f) => fd.append("gallery", f));
 
-      await axiosSecure.post("/computer-lab", fd, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axiosSecure.post("/computer-lab", fd);
       alert("Computer lab page created");
       refetch();
       setGalleryFiles([]);
@@ -125,9 +159,7 @@ const ComputerLabManagement = () => {
         fd.append("galleryUrls", JSON.stringify(form.gallery));
       }
 
-      await axiosSecure.patch(`/computer-lab/${docId}`, fd, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axiosSecure.patch(`/computer-lab/${docId}`, fd);
       alert("Computer lab updated");
       refetch();
       setGalleryFiles([]);
@@ -223,8 +255,17 @@ const ComputerLabManagement = () => {
                   className="file-input file-input-bordered w-full max-w-md"
                   onChange={(e) => setHeroFile(e.target.files?.[0] || null)}
                 />
-                {data?.heroImage && !heroFile && (
-                  <img src={imageSrc(data.heroImage)} alt="Hero" className="mt-2 rounded-lg max-h-40 object-cover" />
+                {(heroPreviewUrl || (data?.heroImage && !heroFile)) && (
+                  <div className="mt-3">
+                    <p className="text-xs text-base-content/60 mb-1">
+                      {heroPreviewUrl ? "নতুন ছবির প্রিভিউ" : "বর্তমান ছবি"}
+                    </p>
+                    <img
+                      src={heroPreviewUrl || imageSrc(data.heroImage)}
+                      alt="Hero preview"
+                      className="rounded-lg max-h-48 w-full max-w-md object-cover border border-base-300"
+                    />
+                  </div>
                 )}
               </div>
             </div>
@@ -282,8 +323,17 @@ const ComputerLabManagement = () => {
                   className="file-input file-input-bordered w-full max-w-md"
                   onChange={(e) => setAboutFile(e.target.files?.[0] || null)}
                 />
-                {data?.aboutImage && !aboutFile && (
-                  <img src={imageSrc(data.aboutImage)} alt="About" className="mt-2 rounded-lg max-h-40 object-cover" />
+                {(aboutPreviewUrl || (data?.aboutImage && !aboutFile)) && (
+                  <div className="mt-3">
+                    <p className="text-xs text-base-content/60 mb-1">
+                      {aboutPreviewUrl ? "নতুন ছবির প্রিভিউ" : "বর্তমান ছবি"}
+                    </p>
+                    <img
+                      src={aboutPreviewUrl || imageSrc(data.aboutImage)}
+                      alt="About preview"
+                      className="rounded-lg max-h-48 w-full max-w-md object-cover border border-base-300"
+                    />
+                  </div>
                 )}
               </div>
             </div>
@@ -342,6 +392,21 @@ const ComputerLabManagement = () => {
               />
               {galleryFiles.length > 0 && (
                 <p className="text-sm mt-1">{galleryFiles.length} file(s) will be appended on save</p>
+              )}
+              {galleryPreviewUrls.length > 0 && (
+                <div className="mt-3">
+                  <p className="text-xs text-base-content/60 mb-2">নতুন গ্যালারি ছবির প্রিভিউ</p>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {galleryPreviewUrls.map((url, i) => (
+                      <img
+                        key={`${url}-${i}`}
+                        src={url}
+                        alt=""
+                        className="w-full h-28 object-cover rounded-lg border border-base-300"
+                      />
+                    ))}
+                  </div>
+                </div>
               )}
             </div>
           </div>

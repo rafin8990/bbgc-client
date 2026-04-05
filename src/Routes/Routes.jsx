@@ -57,6 +57,8 @@ import ComputerLabManagement from "../DashboardPages/ComputerLabManagement"
 import ScienceLabManagement from "../DashboardPages/ScienceLabManagement"
 import LibraryManagement from "../DashboardPages/LibraryManagement"
 import ClassroomManagement from "../DashboardPages/ClassroomManagement"
+import StaffManagement from "../DashboardPages/StaffManagement"
+import Stuffpage from "../pages/staffs/Stuffpage"
 
 export const router=createBrowserRouter([
      //Main Layout Routes
@@ -68,6 +70,8 @@ export const router=createBrowserRouter([
              {path:'/chairmen', element:<Chairmenpage/>},
              {path:'/principal', element:<Principalpage/>},
              {path:'/teacher', element:<Teacherspage/>},
+             {path:'/staff', element:<Stuffpage/>},
+             {path:'/staffs', element:<Stuffpage/>},
              {path:'/history', element:<Historypage/>},
              {path:'/news-events', element:<Newseventpage/>},
              {path:'/achievements', element:<Achievementspage/>},
@@ -126,6 +130,7 @@ export const router=createBrowserRouter([
                   {path:'/dashboard/science-lab-management', element:<ScienceLabManagement/>},
                   {path:'/dashboard/library-management', element:<LibraryManagement/>},
                   {path:'/dashboard/classroom-management', element:<ClassroomManagement/>},
+                  {path:'/dashboard/staff-management', element:<StaffManagement/>},
 
         ]
     }
