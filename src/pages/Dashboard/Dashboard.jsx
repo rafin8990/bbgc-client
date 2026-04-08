@@ -15,6 +15,7 @@ import {
   FaBookOpen,
   FaChalkboardTeacher,
   FaUsers,
+  FaFileSignature,
 } from "react-icons/fa";
 import { FaClipboardUser, FaMapLocationDot } from "react-icons/fa6";
 
@@ -98,6 +99,11 @@ const Dashboard = () => {
             <li>
               <NavLink to="/dashboard/staff-management">
                 <FaUsers /> Staff Management
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/noc-management">
+                <FaFileSignature /> NOC Management
               </NavLink>
             </li>
 

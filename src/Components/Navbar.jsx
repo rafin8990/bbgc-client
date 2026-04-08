@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Link, NavLink } from "react-router";
+import { NavLink } from "react-router";
 import { FaChevronDown, FaBars, FaTimes } from "react-icons/fa";
 import useAuth from "../Hooks/useAuth";
 import useRole from "../Hooks/useRole";
@@ -27,6 +27,7 @@ const menuData = [
       { name: "Vice Principal", link: "/chairmen" },
       { name: "Teachers", link: "/teacher" },
       { name: "Staffs", link: "/staffs" },
+      { name: "NOC Application", link: "/noc" },
     ],
   },
 
@@ -82,7 +83,7 @@ const menuData = [
 export default function Navbar() {
   const [openMenu, setOpenMenu] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const {logout,user}=useAuth()
+  const { logout, user } = useAuth();
   const { role, roleLoading } = useRole();
 
   const activeClass =

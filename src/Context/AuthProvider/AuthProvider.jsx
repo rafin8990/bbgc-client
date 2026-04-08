@@ -18,12 +18,16 @@ const AuthProvider = ({ children }) => {
 
   const registerUser = (email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    return createUserWithEmailAndPassword(auth, email, password).finally(() => {
+      setLoading(false);
+    });
   };
 
   const loginUser = (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
+    return signInWithEmailAndPassword(auth, email, password).finally(() => {
+      setLoading(false);
+    });
   };
 
   const googleLogin = () => {
