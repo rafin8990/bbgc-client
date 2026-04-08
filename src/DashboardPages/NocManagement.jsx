@@ -147,14 +147,14 @@ const NocManagement = () => {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl border border-base-300 bg-base-100 p-5 shadow">
-        <h1 className="mb-1 text-xl font-bold">Issue NOC PDF</h1>
-        <p className="text-sm opacity-70">
+      <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/70 via-slate-800/60 to-slate-900/70 p-6 shadow-2xl">
+        <h1 className="mb-1 text-2xl font-bold text-white">Issue NOC PDF</h1>
+        <p className="text-sm text-slate-300">
           Select a teacher/staff, upload the signed NOC PDF, and submit.
         </p>
       </div>
 
-      <div className="rounded-2xl border border-base-300 bg-base-100 p-5 shadow">
+      <div className="rounded-3xl border border-white/10 bg-white/95 p-6 shadow-xl">
         {isLoading && <p>Loading teacher/staff list...</p>}
 
         {isError && (
@@ -166,13 +166,13 @@ const NocManagement = () => {
         )}
 
         {!isLoading && !isError && (
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div className="form-control">
               <label className="label pt-0">
-                <span className="label-text">Teacher/Staff *</span>
+                <span className="label-text font-semibold text-slate-700">Teacher/Staff *</span>
               </label>
               <select
-                className="select select-bordered w-full"
+                className="select select-bordered w-full bg-white text-slate-800 border-slate-300 focus:border-cyan-500"
                 value={applicantKey}
                 onChange={onApplicantChange}
                 required
@@ -214,11 +214,11 @@ const NocManagement = () => {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="form-control">
                 <label className="label pt-0">
-                  <span className="label-text">Department</span>
+                  <span className="label-text font-semibold text-slate-700">Department</span>
                 </label>
                 <input
                   type="text"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full bg-white text-slate-800 border-slate-300 focus:border-cyan-500"
                   value={department}
                   onChange={(e) => setDepartment(e.target.value)}
                   required
@@ -227,11 +227,11 @@ const NocManagement = () => {
 
               <div className="form-control">
                 <label className="label pt-0">
-                  <span className="label-text">Joining Date</span>
+                  <span className="label-text font-semibold text-slate-700">Joining Date</span>
                 </label>
                 <input
                   type="text"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full bg-white text-slate-800 border-slate-300 focus:border-cyan-500"
                   value={joiningDate}
                   onChange={(e) => setJoiningDate(e.target.value)}
                   required
@@ -241,10 +241,10 @@ const NocManagement = () => {
 
             <div className="form-control">
               <label className="label pt-0">
-                <span className="label-text">Note / Purpose *</span>
+                <span className="label-text font-semibold text-slate-700">Note / Purpose *</span>
               </label>
               <textarea
-                className="textarea textarea-bordered min-h-[120px]"
+                className="textarea textarea-bordered min-h-[130px] bg-white text-slate-800 border-slate-300 focus:border-cyan-500"
                 value={purpose}
                 onChange={(e) => setPurpose(e.target.value)}
                 placeholder="Example: Official NOC issued by admin for bank process."
@@ -254,7 +254,7 @@ const NocManagement = () => {
 
             <div className="form-control">
               <label className="label pt-0">
-                <span className="label-text inline-flex items-center gap-2">
+                <span className="label-text inline-flex items-center gap-2 font-semibold text-slate-700">
                   PDF Attachment * <FaFilePdf />
                 </span>
               </label>
@@ -262,7 +262,7 @@ const NocManagement = () => {
                 id="admin-noc-pdf-input"
                 type="file"
                 accept="application/pdf,.pdf"
-                className="file-input file-input-bordered w-full"
+                className="file-input file-input-bordered w-full bg-white text-slate-700 border-slate-300"
                 onChange={(e) => {
                   setPdfFile(e.target.files?.[0] || null);
                   setMessage({ type: "", text: "" });
@@ -284,7 +284,7 @@ const NocManagement = () => {
 
             <button
               type="submit"
-              className="btn btn-primary w-full md:w-auto"
+              className="btn w-full md:w-auto rounded-full border-0 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 px-8 text-white shadow-lg hover:from-cyan-400 hover:to-blue-500"
               disabled={submitting || !parseApplicantValue(applicantKey)}
             >
               {submitting ? (
@@ -302,17 +302,17 @@ const NocManagement = () => {
         )}
       </div>
 
-      <div className="rounded-2xl border border-base-300 bg-base-100 p-5 shadow">
-        <h2 className="mb-3 text-lg font-semibold">
+      <div className="rounded-3xl border border-white/10 bg-white/95 p-6 shadow-xl">
+        <h2 className="mb-4 text-xl font-bold text-slate-800">
           Recently Issued NOC ({recentNocs?.length ?? 0})
         </h2>
         {recentLoading ? (
           <p>Loading list...</p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="table table-sm">
+          <div className="overflow-x-auto rounded-2xl border border-slate-200">
+            <table className="table table-md">
               <thead>
-                <tr>
+                <tr className="bg-slate-100 text-slate-700">
                   <th>Name</th>
                   <th>Type</th>
                   <th>Date</th>
@@ -323,7 +323,7 @@ const NocManagement = () => {
                 {recentNocs?.length ? (
                   recentNocs.slice(0, 12).map((row) => (
                     <tr key={row._id}>
-                      <td>{row.name || "—"}</td>
+                      <td className="font-medium text-slate-800">{row.name || "—"}</td>
                       <td className="capitalize">{row.memberType || "—"}</td>
                       <td className="whitespace-nowrap text-xs">
                         {row.createdAt
@@ -336,9 +336,9 @@ const NocManagement = () => {
                             href={pdfUrl(row.file)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="link link-primary inline-flex items-center gap-1"
+                            className="inline-flex items-center gap-2 rounded-full border border-cyan-300 bg-cyan-50 px-4 py-2 text-sm font-semibold text-cyan-700 transition hover:bg-cyan-100"
                           >
-                            <FaFilePdf /> Open
+                            <FaFilePdf /> View PDF
                           </a>
                         ) : (
                           "—"
