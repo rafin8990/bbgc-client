@@ -89,7 +89,7 @@ export const router=createBrowserRouter([
              {path:'/photos', element:<Photospage/>},
              {path:'/videos', element:<Videopage/>},
              {path:'/contact', element:<Contactpage/>},
-             {path:'/noc', element:<Privateroutes requireEmail={false}><Nocpage/></Privateroutes>},
+             {path:'/noc', element:<Nocpage/>},
              {path:'/why-study', element:<Whaystudypage/>},
              {path:'/classrooms', element:<Classroompage/>},
              {path:'/computer-lab', element:<Computerlabpage/>},

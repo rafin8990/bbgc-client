@@ -27,7 +27,7 @@ const menuData = [
       { name: "Vice Principal", link: "/chairmen" },
       { name: "Teachers", link: "/teacher" },
       { name: "Staffs", link: "/staffs" },
-      { name: "NOC Application", link: "/noc" },
+      { name: "NOC Download", link: "/noc" },
     ],
   },
 
